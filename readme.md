@@ -1,3 +1,14 @@
+
+   ____                   _____                _ _ 
+  / __ \                 |  __ \              | | |
+ | |  | |_ __   ___ _ __ | |__) |___  ___ __ _| | |
+ | |  | | '_ \ / _ \ '_ \|  _  // _ \/ __/ _` | | |
+ | |__| | |_) |  __/ | | | | \ \  __/ (_| (_| | | |
+  \____/| .__/ \___|_| |_|_|  \_\___|\___\__,_|_|_|
+        | |                                        
+        |_|                                        
+
+
 # OpenRecall - Take Control of Your Digital Memory
 
 OpenRecall is a fully open-source, privacy-first alternative to proprietary solutions like Microsoft's Windows Recall or Limitless' Rewind.ai. With OpenRecall, you can easily access your digital history, enhancing your memory and productivity without compromising your privacy.
@@ -6,7 +17,9 @@ OpenRecall is a fully open-source, privacy-first alternative to proprietary solu
 
 OpenRecall captures your digital history through regularly taken snapshots, which are essentially screenshots. The text and images within these screenshots are analyzed and made searchable, allowing you to quickly find specific information by typing relevant keywords into OpenRecall. You can also manually scroll back through your history to revisit past activities.
 
-[![Lisa Rewind](images/lisa_rewind.webp)]
+<p align="center">
+  <img src="images/lisa_rewind.webp" alt="Lisa Rewind" width="200">
+</p>
 
 ## Why Choose OpenRecall?
 
@@ -16,8 +29,12 @@ OpenRecall offers several key advantages over closed-source alternatives:
 - **Cross-platform Support**: OpenRecall works seamlessly on Windows, macOS, and Linux, giving you the freedom to use it on your preferred operating system.
 - **Privacy-focused**: Your data is stored locally on your device, and you have the option to encrypt it with a password for added security. No cloud integration is required.
 - **Hardware Compatibility**: OpenRecall is designed to work with a wide range of hardware, unlike proprietary solutions that may require specific certified devices.
-
-[![Elon Musk Tweet](images/black_mirror.png)](https://twitter.com/elonmusk/status/1792690964672450971)
+- 
+<p align="center">
+  <a href="https://twitter.com/elonmusk/status/1792690964672450971">
+    <img src="images/black_mirror.png" alt="Elon Musk Tweet" width="200">
+  </a>
+</p>
 
 ## Features
 
