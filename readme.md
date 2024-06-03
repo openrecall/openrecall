@@ -2,11 +2,11 @@
 
 OpenRecall is a fully open-source, privacy-first alternative to proprietary solutions like Microsoft's Windows Recall or Limitless' Rewind.ai. With OpenRecall, you can easily access your digital history, enhancing your memory and productivity without compromising your privacy.
 
-<blockquote class="twitter-tweet"><p lang="en" dir="ltr">This is a Black Mirror episode. <br><br>Definitely turning this "feature" off. <a href="https://t.co/bx1KLqLf67">https://t.co/bx1KLqLf67</a></p>&mdash; Elon Musk (@elonmusk) <a href="https://twitter.com/elonmusk/status/1792690964672450971?ref_src=twsrc%5Etfw">May 20, 2024</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-
 ## What does it do?
 
 OpenRecall captures your digital history through regularly taken snapshots, which are essentially screenshots. The text and images within these screenshots are analyzed and made searchable, allowing you to quickly find specific information by typing relevant keywords into OpenRecall. You can also manually scroll back through your history to revisit past activities.
+
+[![Lisa Rewind](images/lisa_rewind.webp)]
 
 ## Why Choose OpenRecall?
 
@@ -16,6 +16,8 @@ OpenRecall offers several key advantages over closed-source alternatives:
 - **Cross-platform Support**: OpenRecall works seamlessly on Windows, macOS, and Linux, giving you the freedom to use it on your preferred operating system.
 - **Privacy-focused**: Your data is stored locally on your device, and you have the option to encrypt it with a password for added security. No cloud integration is required.
 - **Hardware Compatibility**: OpenRecall is designed to work with a wide range of hardware, unlike proprietary solutions that may require specific certified devices.
+
+[![Elon Musk Tweet](images/black_mirror.png)](https://twitter.com/elonmusk/status/1792690964672450971)
 
 ## Features
 
