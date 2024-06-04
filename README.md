@@ -27,7 +27,7 @@ OpenRecall offers several key advantages over closed-source alternatives:
 
 - **Transparency**: OpenRecall is 100% open-source, allowing you to audit the source code for potential backdoors or privacy-invading features.
 - **Cross-platform Support**: OpenRecall works seamlessly on Windows, macOS, and Linux, giving you the freedom to use it on your preferred operating system.
-- **Privacy-focused**: Your data is stored locally on your device, and you have the option to encrypt it with a password for added security. No cloud integration is required.
+- **Privacy-focused**: (soon to be implemented) Your data is stored locally on your device, and you have the option to encrypt it with a password for added security. No cloud integration is required. 
 - **Hardware Compatibility**: OpenRecall is designed to work with a wide range of hardware, unlike proprietary solutions that may require specific certified devices.
 
 <p align="center">
@@ -61,11 +61,20 @@ We have exciting plans for OpenRecall's future, including:
 
 ## Get Started
 
-To start using OpenRecall, simply pip install and run
+### Prerequisites
+- Python 3.11
+- MacOSX/Windows/Linux
 
+To install:
 ```
-pip install openrecall
+pip install git+https://github.com/openrecall/openrecall.git
 ```
+To run:
+```
+python3 -m openrecall.app
+```
+Open your browser to:
+[http://localhost:8082](http://localhost:8082) to access OpenRecall.
 
 ## Contribute
 
