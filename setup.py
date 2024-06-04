@@ -7,9 +7,26 @@ from setuptools import find_packages, setup
 with io.open("README.md", "r", encoding="utf-8") as f:
     long_description = f.read()
 
-# Read the requirements from requirements.txt
-with open("requirements.txt", "r") as f:
-    install_requires = [line.strip() for line in f.readlines()]
+install_requires = [
+    "Flask==3.0.3",
+    "numpy==1.26.4",
+    "mss==9.0.1",
+    "pillow==10.3.0",
+    "sentence-transformers==3.0.0",
+    "torch==2.3.0",
+    "torchvision==0.18.0",
+    "shapely",
+    "h5py",
+    "rapidfuzz"
+]
+
+import subprocess
+import sys
+
+def install_doctr():
+    subprocess.run([sys.executable, "-m", "pip", "install", "git+https://github.com/koenvaneijk/doctr.git"])
+
+install_doctr()
 
 # Define OS-specific dependencies
 extras_require = {"windows": ["pywin32"], "macos": ["pyobjc"], "linux": []}
