@@ -24,7 +24,7 @@ https://github.com/openrecall/openrecall/assets/16676419/cfc579cb-165b-43e4-9325
 OpenRecall offers several key advantages over closed-source alternatives:
 
 - **Transparency**: OpenRecall is 100% open-source, allowing you to audit the source code for potential backdoors or privacy-invading features.
-- **Cross-platform Support**: OpenRecall works seamlessly on Windows, macOS, and Linux, giving you the freedom to use it on your preferred operating system.
+- **Cross-platform Support**: OpenRecall works on Windows, macOS, and Linux, giving you the freedom to use it on your preferred operating system.
 - **Privacy-focused**: Your data is stored locally on your device, and you have the option (soon to be implemented) to encrypt it with a password for added security. No cloud integration is required. 
 - **Hardware Compatibility**: OpenRecall is designed to work with a wide range of hardware, unlike proprietary solutions that may require specific certified devices.
 
