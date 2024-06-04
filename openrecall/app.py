@@ -88,9 +88,16 @@ def get_active_app_name_windows():
     """returns the app's name .exe"""
     import psutil
     import win32gui
+    import win32process
 
-    pid = win32gui.GetForegroundWindow()
-    exe = psutil.Process(win32gui.GetWindowThreadProcessId(pid)[-1]).name()
+    # Get the handle of the foreground window
+    hwnd = win32gui.GetForegroundWindow()
+    
+    # Get the thread process ID of the foreground window
+    _, pid = win32process.GetWindowThreadProcessId(hwnd)
+    
+    # Get the process name using psutil
+    exe = psutil.Process(pid).name()
     return exe
 
 
@@ -299,9 +306,11 @@ def human_readable_time(timestamp):
 
 def timestamp_to_human_readable(timestamp):
     import datetime
-
-    dt_object = datetime.datetime.fromtimestamp(timestamp)
-    return dt_object.strftime("%Y-%m-%d %H:%M:%S")
+    try:
+        dt_object = datetime.datetime.fromtimestamp(timestamp)
+        return dt_object.strftime("%Y-%m-%d %H:%M:%S")
+    except:
+        return ""
 
 
 app.jinja_env.filters["human_readable_time"] = human_readable_time
@@ -364,6 +373,7 @@ def timeline():
     </form>
   </div>
 </nav>
+{% if timestamps|length > 0 %}
   <div class="container">
     <div class="slider-container">
       <input type="range" class="slider custom-range" id="discreteSlider" min="0" max="{{timestamps|length - 1}}" step="1" value="{{timestamps|length - 1}}">
@@ -373,7 +383,14 @@ def timeline():
       <img id="timestampImage" src="/static/{{timestamps[0]}}.webp" alt="Image for timestamp">
     </div>
   </div>
+{% else %}
+    <div class="container">
+        <div class="alert alert-info" role="alert">
+            Nothing recorded yet, wait a few seconds.
+        </div>
+    </div>
 
+{% endif %}
   <!-- Bootstrap and jQuery JS -->
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
