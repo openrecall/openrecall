@@ -9,7 +9,7 @@
         |_|                                        
 ```
 
-# OpenRecall - Take Control of Your Digital Memory
+# Take Control of Your Digital Memory
 
 OpenRecall is a fully open-source, privacy-first alternative to proprietary solutions like Microsoft's Windows Recall or Limitless' Rewind.ai. With OpenRecall, you can easily access your digital history, enhancing your memory and productivity without compromising your privacy.
 
@@ -18,7 +18,7 @@ OpenRecall is a fully open-source, privacy-first alternative to proprietary solu
 OpenRecall captures your digital history through regularly taken snapshots, which are essentially screenshots. The text and images within these screenshots are analyzed and made searchable, allowing you to quickly find specific information by typing relevant keywords into OpenRecall. You can also manually scroll back through your history to revisit past activities.
 
 <p align="center">
-  <img src="images/lisa_rewind.webp" alt="Lisa Rewind" width="200">
+  <img src="images/lisa_rewind.webp" alt="Lisa Rewind" width="500">
 </p>
 
 ## Why Choose OpenRecall?
@@ -29,10 +29,10 @@ OpenRecall offers several key advantages over closed-source alternatives:
 - **Cross-platform Support**: OpenRecall works seamlessly on Windows, macOS, and Linux, giving you the freedom to use it on your preferred operating system.
 - **Privacy-focused**: (soon to be implemented) Your data is stored locally on your device, and you have the option to encrypt it with a password for added security. No cloud integration is required. 
 - **Hardware Compatibility**: OpenRecall is designed to work with a wide range of hardware, unlike proprietary solutions that may require specific certified devices.
-- 
+
 <p align="center">
   <a href="https://twitter.com/elonmusk/status/1792690964672450971">
-    <img src="images/black_mirror.png" alt="Elon Musk Tweet" width="200">
+    <img src="images/black_mirror.png" alt="Elon Musk Tweet" width="500">
   </a>
 </p>
 
@@ -42,7 +42,7 @@ OpenRecall offers several key advantages over closed-source alternatives:
 - **Local-first AI**: OpenRecall leverages local AI processing to ensure your data remains private and secure.
 - **Encrypted Storage**: (soon to be implemented) Optionally encrypt your local data with a password to protect against unauthorized access, even if your device is lost or stolen.
 - **Pause Functionality**: Pause OpenRecall indefinitely or for a specified duration (e.g., 30 minutes) to maintain privacy when needed.
-- **Exclude apps**: Exclude apps that you do not want to record
+- **Exclude apps**: Exclude apps that you do not want to record for privacy
 
 ## Comparison
 
@@ -62,6 +62,7 @@ We have exciting plans for OpenRecall's future, including:
 
 ## Get Started
 
+<<<<<<< HEAD:README.md
 ### Prerequisites
 - Python 3.11
 - MacOSX/Windows/Linux
@@ -76,6 +77,13 @@ python3 -m openrecall.app
 ```
 Open your browser to:
 [http://localhost:8082](http://localhost:8082) to access OpenRecall.
+=======
+To start using OpenRecall, simply pip install and run
+
+```
+pip install openrecall
+```
+>>>>>>> 2a1f12be9a8cf2aab83942384d7107acb829d3a9:readme.md
 
 ## Contribute
 
