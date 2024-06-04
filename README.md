@@ -18,7 +18,7 @@ OpenRecall is a fully open-source, privacy-first alternative to proprietary solu
 OpenRecall captures your digital history through regularly taken snapshots, which are essentially screenshots. The text and images within these screenshots are analyzed and made searchable, allowing you to quickly find specific information by typing relevant keywords into OpenRecall. You can also manually scroll back through your history to revisit past activities.
 
 <p align="center">
-  <img src="images/lisa_rewind.webp" alt="Lisa Rewind" width="500">
+  <img src="images/lisa_rewind.webp" alt="Lisa Rewind" width="400">
 </p>
 
 ## Why Choose OpenRecall?
@@ -31,18 +31,17 @@ OpenRecall offers several key advantages over closed-source alternatives:
 - **Hardware Compatibility**: OpenRecall is designed to work with a wide range of hardware, unlike proprietary solutions that may require specific certified devices.
 
 <p align="center">
-  <a href="https://twitter.com/elonmusk/status/1792690964672450971">
-    <img src="images/black_mirror.png" alt="Elon Musk Tweet" width="500">
+  <a href="https://twitter.com/elonmusk/status/1792690964672450971" target="_blank">
+    <img src="images/black_mirror.png" alt="Elon Musk Tweet" width="400">
   </a>
 </p>
 
 ## Features
 
-- **Time Travel**: Go back in time and revisit your digital activities on Windows, macOS, or Linux.
-- **Local-first AI**: OpenRecall leverages local AI processing to ensure your data remains private and secure.
-- **Encrypted Storage**: (soon to be implemented) Optionally encrypt your local data with a password to protect against unauthorized access, even if your device is lost or stolen.
-- **Pause Functionality**: Pause OpenRecall indefinitely or for a specified duration (e.g., 30 minutes) to maintain privacy when needed.
-- **Exclude apps**: Exclude apps that you do not want to record for privacy
+- **Time Travel**: Revisit and explore your past digital activities seamlessly across Windows, macOS, or Linux.
+- **Local-First AI**: OpenRecall harnesses the power of local AI processing to keep your data private and secure.
+- **Semantic Search**: Advanced local OCR interprets your history, providing robust semantic search capabilities.
+- **Full Control Over Storage**: Your data is stored locally, giving you complete control over its management and security.
 
 ## Comparison
 
@@ -59,6 +58,10 @@ We have exciting plans for OpenRecall's future, including:
 
 - Visual search capabilities
 - Audio transcription for enhanced searchability
+
+# Vote
+
+[Vote on your favorite features here and help us determine the priority of the roadmap](https://github.com/openrecall/openrecall/discussions/9#discussion-6775473)
 
 ## Get Started
 
