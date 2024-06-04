@@ -62,7 +62,6 @@ We have exciting plans for OpenRecall's future, including:
 
 ## Get Started
 
-<<<<<<< HEAD:README.md
 ### Prerequisites
 - Python 3.11
 - MacOSX/Windows/Linux
@@ -77,13 +76,6 @@ python3 -m openrecall.app
 ```
 Open your browser to:
 [http://localhost:8082](http://localhost:8082) to access OpenRecall.
-=======
-To start using OpenRecall, simply pip install and run
-
-```
-pip install openrecall
-```
->>>>>>> 2a1f12be9a8cf2aab83942384d7107acb829d3a9:readme.md
 
 ## Contribute
 
