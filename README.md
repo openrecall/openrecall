@@ -17,9 +17,9 @@ OpenRecall is a fully open-source, privacy-first alternative to proprietary solu
 
 OpenRecall captures your digital history through regularly taken snapshots, which are essentially screenshots. The text and images within these screenshots are analyzed and made searchable, allowing you to quickly find specific information by typing relevant keywords into OpenRecall. You can also manually scroll back through your history to revisit past activities.
 
-<p align="center">
-  <img src="images/lisa_rewind.webp" alt="Lisa Rewind" width="400">
-</p>
+<video src="./images/openrecall_demo.mp4" width="640" controls>
+  Your browser does not support the video tag.
+</video>
 
 ## Why Choose OpenRecall?
 
@@ -42,6 +42,11 @@ OpenRecall offers several key advantages over closed-source alternatives:
 - **Local-First AI**: OpenRecall harnesses the power of local AI processing to keep your data private and secure.
 - **Semantic Search**: Advanced local OCR interprets your history, providing robust semantic search capabilities.
 - **Full Control Over Storage**: Your data is stored locally, giving you complete control over its management and security.
+
+<p align="center">
+  <img src="images/lisa_rewind.webp" alt="Lisa Rewind" width="400">
+</p>
+
 
 ## Comparison
 
