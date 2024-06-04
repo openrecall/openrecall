@@ -59,6 +59,10 @@ We have exciting plans for OpenRecall's future, including:
 - Visual search capabilities
 - Audio transcription for enhanced searchability
 
+# Vote
+
+[Vote on your favorite features here and help us determine the priority of the roadmap](https://github.com/openrecall/openrecall/discussions/9#discussion-6775473)
+
 ## Get Started
 
 ### Prerequisites
