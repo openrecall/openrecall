@@ -27,7 +27,7 @@ OpenRecall offers several key advantages over closed-source alternatives:
 
 - **Transparency**: OpenRecall is 100% open-source, allowing you to audit the source code for potential backdoors or privacy-invading features.
 - **Cross-platform Support**: OpenRecall works seamlessly on Windows, macOS, and Linux, giving you the freedom to use it on your preferred operating system.
-- **Privacy-focused**: Your data is stored locally on your device, and you have the option to encrypt it with a password for added security. No cloud integration is required.
+- **Privacy-focused**: (soon to be implemented) Your data is stored locally on your device, and you have the option to encrypt it with a password for added security. No cloud integration is required. 
 - **Hardware Compatibility**: OpenRecall is designed to work with a wide range of hardware, unlike proprietary solutions that may require specific certified devices.
 - 
 <p align="center">
@@ -40,7 +40,7 @@ OpenRecall offers several key advantages over closed-source alternatives:
 
 - **Time Travel**: Go back in time and revisit your digital activities on Windows, macOS, or Linux.
 - **Local-first AI**: OpenRecall leverages local AI processing to ensure your data remains private and secure.
-- **Encrypted Storage**: Optionally encrypt your local data with a password to protect against unauthorized access, even if your device is lost or stolen.
+- **Encrypted Storage**: (soon to be implemented) Optionally encrypt your local data with a password to protect against unauthorized access, even if your device is lost or stolen.
 - **Pause Functionality**: Pause OpenRecall indefinitely or for a specified duration (e.g., 30 minutes) to maintain privacy when needed.
 - **Exclude apps**: Exclude apps that you do not want to record
 
@@ -62,7 +62,20 @@ We have exciting plans for OpenRecall's future, including:
 
 ## Get Started
 
-To start using OpenRecall, simply visit our GitHub repository, follow the installation instructions, and take control of your digital memory today!
+### Prerequisites
+- Python 3.11
+- MacOSX/Windows/Linux
+
+To install:
+```
+pip install git+https://github.com/openrecall/openrecall.git
+```
+To run:
+```
+python3 -m openrecall.app
+```
+Open your browser to:
+[http://localhost:8082](http://localhost:8082) to access OpenRecall.
 
 ## Contribute
 
