@@ -17,7 +17,10 @@ OpenRecall is a fully open-source, privacy-first alternative to proprietary solu
 
 OpenRecall captures your digital history through regularly taken snapshots, which are essentially screenshots. The text and images within these screenshots are analyzed and made searchable, allowing you to quickly find specific information by typing relevant keywords into OpenRecall. You can also manually scroll back through your history to revisit past activities.
 
-https://github.com/openrecall/openrecall/blob/main/images/openrecall_demo.mp4
+<video width="640" height="360" controls>
+  <source src="https://github.com/openrecall/openrecall/blob/main/images/openrecall_demo.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
 
 ## Why Choose OpenRecall?
 
