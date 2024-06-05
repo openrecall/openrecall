@@ -48,12 +48,15 @@ OpenRecall offers several key advantages over closed-source alternatives:
 
 ## Comparison
 
+
+
 | Feature          | OpenRecall                    | Windows Recall                                  | Rewind.ai                              |
 |------------------|-------------------------------|--------------------------------------------------|----------------------------------------|
 | Transparency     | Open-source                   | Closed-source                                    | Closed-source                          |
 | Supported Hardware | All                         | Copilot+ certified Windows hardware              | M1/M2 Apple Silicon                    |
 | OS Support       | Windows, macOS, Linux         | Windows                                          | macOS                                  |
 | Privacy          | On-device, self-hosted        | Microsoft's privacy policy applies               | Connected to ChatGPT                   |
+| Cost             | Free                          | Part of Windows 11 (requires specialized hardware) | Monthly subscription                   |
 
 ## Roadmap
 
