@@ -8,6 +8,7 @@
         | |                                        
         |_|                                        
 ```
+**Enjoy this project?** Show your support by starring it! ⭐️
 
 # Take Control of Your Digital Memory
 
