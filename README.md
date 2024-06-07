@@ -77,7 +77,7 @@ We have exciting plans for OpenRecall's future, including:
 
 To install:
 ```
-pip install openrecall
+pip install git+https://github.com/openrecall/openrecall.git
 ```
 To run:
 ```
