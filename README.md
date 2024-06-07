@@ -74,6 +74,7 @@ We have exciting plans for OpenRecall's future, including:
 ### Prerequisites
 - Python 3.11
 - MacOSX/Windows/Linux
+- Git
 
 To install:
 ```
