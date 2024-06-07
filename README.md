@@ -78,8 +78,9 @@ We have exciting plans for OpenRecall's future, including:
 
 To install:
 ```
-pip install git+https://github.com/openrecall/openrecall.git
+pip install --upgrade --no-cache-dir git+https://github.com/openrecall/openrecall.git
 ```
+
 To run:
 ```
 python3 -m openrecall.app
