@@ -59,12 +59,9 @@ OpenRecall offers several key advantages over closed-source alternatives:
 | Privacy          | On-device, self-hosted        | Microsoft's privacy policy applies               | Connected to ChatGPT                   |
 | Cost             | Free                          | Part of Windows 11 (requires specialized hardware) | Monthly subscription                   |
 
-## Roadmap
-
-We have exciting plans for OpenRecall's future, including:
-
-- Visual search capabilities
-- Audio transcription for enhanced searchability
+## Quick links
+- [Roadmap](https://github.com/orgs/openrecall/projects/2)
+- [FAQ](https://github.com/openrecall/openrecall/wiki/FAQ)
 
 # Vote
 
