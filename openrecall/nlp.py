@@ -1,5 +1,5 @@
-from sentence_transformers import SentenceTransformer
 import numpy as np
+from sentence_transformers import SentenceTransformer
 
 
 def get_embedding(text):
@@ -13,4 +13,3 @@ def get_embedding(text):
 
 def cosine_similarity(a, b):
     return np.dot(a, b) / (np.linalg.norm(a) * np.linalg.norm(b))
-
