@@ -29,7 +29,7 @@ def install_doctr():
 install_doctr()
 
 # Define OS-specific dependencies
-extras_require = {"windows": ["pywin32"], "macos": ["pyobjc"], "linux": []}
+extras_require = {"windows": ["pywin32", "psutil"], "macos": ["pyobjc"], "linux": []}
 
 # Determine the current OS
 current_os = platform.system().lower()
