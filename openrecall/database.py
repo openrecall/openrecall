@@ -1,62 +1,46 @@
 import sqlite3
+from collections import namedtuple
+from typing import Any, List
 
 from openrecall.config import db_path
 
-
-def create_db():
-    conn = sqlite3.connect(db_path)
-    c = conn.cursor()
-    c.execute(
-        """CREATE TABLE IF NOT EXISTS entries
-           (id INTEGER PRIMARY KEY AUTOINCREMENT, app TEXT, title TEXT, text TEXT, timestamp INTEGER, embedding BLOB)"""
-    )
-    conn.commit()
-    conn.close()
+Entry = namedtuple("Entry", ["id", "app", "title", "text", "timestamp", "embedding"])
 
 
-def get_all_entries():
-    conn = sqlite3.connect(db_path)
-    c = conn.cursor()
-    results = c.execute("SELECT * FROM entries").fetchall()
-    conn.close()
-    entries = []
-    for result in results:
-        entries.append(
-            {
-                "id": result[0],
-                "app": result[1],
-                "title": result[2],
-                "text": result[3],
-                "timestamp": result[4],
-                "embedding": result[5],
-            }
+def create_db() -> None:
+    with sqlite3.connect(db_path) as conn:
+        c = conn.cursor()
+        c.execute(
+            """CREATE TABLE IF NOT EXISTS entries
+               (id INTEGER PRIMARY KEY AUTOINCREMENT, app TEXT, title TEXT, text TEXT, timestamp INTEGER, embedding BLOB)"""
         )
-    return entries
+        conn.commit()
 
 
-def get_timestamps():
-    conn = sqlite3.connect(db_path)
-    c = conn.cursor()
-    results = c.execute(
-        "SELECT timestamp FROM entries ORDER BY timestamp DESC LIMIT 1000"
-    ).fetchall()
-    timestamps = [result[0] for result in results]
-    conn.close()
-    return timestamps
+def get_all_entries() -> List[Entry]:
+    with sqlite3.connect(db_path) as conn:
+        c = conn.cursor()
+        results = c.execute("SELECT * FROM entries").fetchall()
+        return [Entry(*result) for result in results]
 
-def insert_entry(text, timestamp, embedding, app, title):
-    conn = sqlite3.connect(db_path)
-    c = conn.cursor()
+
+def get_timestamps() -> List[int]:
+    with sqlite3.connect(db_path) as conn:
+        c = conn.cursor()
+        results = c.execute(
+            "SELECT timestamp FROM entries ORDER BY timestamp DESC LIMIT 1000"
+        ).fetchall()
+        return [result[0] for result in results]
+
+
+def insert_entry(
+    text: str, timestamp: int, embedding: Any, app: str, title: str
+) -> None:
     embedding_bytes = embedding.tobytes()
-    c.execute(
-        "INSERT INTO entries (text, timestamp, embedding, app, title) VALUES (?, ?, ?, ?, ?)",
-        (
-            text,
-            timestamp,
-            embedding_bytes,
-            app,
-            title,
-        ),
-    )
-    conn.commit()
-    conn.close()
+    with sqlite3.connect(db_path) as conn:
+        c = conn.cursor()
+        c.execute(
+            "INSERT INTO entries (text, timestamp, embedding, app, title) VALUES (?, ?, ?, ?, ?)",
+            (text, timestamp, embedding_bytes, app, title),
+        )
+        conn.commit()
