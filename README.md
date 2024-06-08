@@ -1,12 +1,10 @@
 ```
-   ____                   _____                _ _ 
-  / __ \                 |  __ \              | | |
- | |  | |_ __   ___ _ __ | |__) |___  ___ __ _| | |
- | |  | | '_ \ / _ \ '_ \|  _  // _ \/ __/ _` | | |
- | |__| | |_) |  __/ | | | | \ \  __/ (_| (_| | | |
-  \____/| .__/ \___|_| |_|_|  \_\___|\___\__,_|_|_|
-        | |                                        
-        |_|                                        
+   ____                   ____                  ____   
+  / __ \____  ___  ____  / __ \___  _________ _/ / /   
+ / / / / __ \/ _ \/ __ \/ /_/ / _ \/ ___/ __ `/ / /    
+/ /_/ / /_/ /  __/ / / / _, _/  __/ /__/ /_/ / / /     
+\____/ .___/\___/_/ /_/_/ |_|\___/\___/\__,_/_/_/      
+    /_/                                                                                                                         
 ```
 **Enjoy this project?** Show your support by starring it! ⭐️
 
@@ -60,12 +58,8 @@ OpenRecall offers several key advantages over closed-source alternatives:
 | Cost             | Free                          | Part of Windows 11 (requires specialized hardware) | Monthly subscription                   |
 
 ## Quick links
-- [Roadmap](https://github.com/orgs/openrecall/projects/2)
+- [Roadmap](https://github.com/orgs/openrecall/projects/2) and you can [vote for your favorite features](https://github.com/openrecall/openrecall/discussions/9#discussion-6775473)
 - [FAQ](https://github.com/openrecall/openrecall/wiki/FAQ)
-
-# Vote
-
-[Vote on your favorite features here and help us determine the priority of the roadmap](https://github.com/openrecall/openrecall/discussions/9#discussion-6775473)
 
 ## Get Started
 
