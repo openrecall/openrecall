@@ -6,13 +6,11 @@ import numpy as np
 from PIL import Image
 
 from openrecall.config import db_path, screenshots_path
-from openrecall.ocr import extract_text_from_image
-from openrecall.utils import (
-    get_active_app_name,
-    get_active_window_title
-)
-from openrecall.nlp import get_embedding
 from openrecall.database import insert_entry
+from openrecall.nlp import get_embedding
+from openrecall.ocr import extract_text_from_image
+from openrecall.utils import get_active_app_name, get_active_window_title
+
 
 def mean_structured_similarity_index(img1, img2, L=255):
     K1, K2 = 0.01, 0.03
@@ -69,5 +67,7 @@ def record_screenshots_thread():
                 embedding = get_embedding(text)
                 active_app_name = get_active_app_name()
                 active_window_title = get_active_window_title()
-                insert_entry(text, timestamp, embedding, active_app_name, active_window_title)
+                insert_entry(
+                    text, timestamp, embedding, active_app_name, active_window_title
+                )
         time.sleep(3)
