@@ -17,14 +17,24 @@ install_requires = [
     "torchvision==0.18.0",
     "shapely",
     "h5py",
-    "rapidfuzz"
+    "rapidfuzz",
 ]
 
 import subprocess
 import sys
 
+
 def install_doctr():
-    subprocess.run([sys.executable, "-m", "pip", "install", "git+https://github.com/koenvaneijk/doctr.git"])
+    subprocess.run(
+        [
+            sys.executable,
+            "-m",
+            "pip",
+            "install",
+            "git+https://github.com/koenvaneijk/doctr.git",
+        ]
+    )
+
 
 install_doctr()
 
