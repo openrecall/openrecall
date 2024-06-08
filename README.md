@@ -8,6 +8,7 @@
         | |                                        
         |_|                                        
 ```
+**Enjoy this project?** Show your support by starring it! ⭐️
 
 # Take Control of Your Digital Memory
 
@@ -78,8 +79,9 @@ We have exciting plans for OpenRecall's future, including:
 
 To install:
 ```
-pip install git+https://github.com/openrecall/openrecall.git
+pip install --upgrade --no-cache-dir git+https://github.com/openrecall/openrecall.git
 ```
+
 To run:
 ```
 python3 -m openrecall.app
