@@ -6,6 +6,7 @@ ocr = ocr_predictor(
     reco_arch="crnn_mobilenet_v3_large",
 )
 
+
 def extract_text_from_image(image):
     result = ocr([image])
     text = ""
