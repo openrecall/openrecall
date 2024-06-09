@@ -18,25 +18,8 @@ install_requires = [
     "shapely",
     "h5py",
     "rapidfuzz",
+    "python-doctr @ git+https://github.com/koenvaneijk/doctr.git@af711bc04eb8876a7189923fb51ec44481ee18cd",
 ]
-
-import subprocess
-import sys
-
-
-def install_doctr():
-    subprocess.run(
-        [
-            sys.executable,
-            "-m",
-            "pip",
-            "install",
-            "git+https://github.com/koenvaneijk/doctr.git",
-        ]
-    )
-
-
-install_doctr()
 
 # Define OS-specific dependencies
 extras_require = {"windows": ["pywin32", "psutil"], "macos": ["pyobjc"], "linux": []}
