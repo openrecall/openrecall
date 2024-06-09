@@ -5,7 +5,7 @@ import mss
 import numpy as np
 from PIL import Image
 
-from openrecall.config import db_path, screenshots_path
+from openrecall.config import screenshots_path
 from openrecall.database import insert_entry
 from openrecall.nlp import get_embedding
 from openrecall.ocr import extract_text_from_image
