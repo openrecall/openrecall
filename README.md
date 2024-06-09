@@ -80,6 +80,9 @@ python3 -m openrecall.app
 Open your browser to:
 [http://localhost:8082](http://localhost:8082) to access OpenRecall.
 
+## Arguments
+`--storage-path` (default: user data path for your OS): allows you to specify the pathwhere the screenshots and database should be stored.
+
 ## Contribute
 
 As an open-source project, we welcome contributions from the community. If you'd like to help improve OpenRecall, please submit a pull request or open an issue on our GitHub repository.
