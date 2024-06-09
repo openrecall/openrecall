@@ -70,7 +70,7 @@ OpenRecall offers several key advantages over closed-source alternatives:
 
 To install:
 ```
-pip install --upgrade --no-cache-dir git+https://github.com/openrecall/openrecall.git
+python3 -m pip install --upgrade --no-cache-dir git+https://github.com/openrecall/openrecall.git
 ```
 
 To run:
