@@ -1,6 +1,5 @@
 import sys
 
-
 def human_readable_time(timestamp):
     import datetime
 
@@ -69,11 +68,20 @@ def get_active_window_title_windows():
     return win32gui.GetWindowText(hwnd)
 
 
+def get_active_app_name_linux():
+    return ''
+
+
+def get_active_window_title_linux():
+    return ''
+
 def get_active_app_name():
     if sys.platform == "win32":
         return get_active_app_name_windows()
     elif sys.platform == "darwin":
         return get_active_app_name_osx()
+    elif sys.platform.startswith("linux"):
+        return get_active_app_name_linux()
     else:
         raise NotImplementedError("This platform is not supported")
 
@@ -83,5 +91,7 @@ def get_active_window_title():
         return get_active_window_title_windows()
     elif sys.platform == "darwin":
         return get_active_window_title_osx()
+    elif sys.platform.startswith("linux"):
+        return get_active_window_title_linux()
     else:
         raise NotImplementedError("This platform is not supported")
