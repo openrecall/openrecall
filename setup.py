@@ -58,7 +58,7 @@ if current_os and current_os in extras_require:
 
 setup(
     name="OpenRecall",
-    version="0.2",
+    version="0.3",
     packages=find_packages(),
     install_requires=install_requires,
     long_description=long_description,
