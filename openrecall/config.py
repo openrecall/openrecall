@@ -13,6 +13,14 @@ parser.add_argument(
     help="Path to store the screenshots and database",
 )
 
+parser.add_argument(
+    "--primary-monitor-only",
+    action="store_true",
+    help="Only record the primary monitor",
+    type=bool,
+    default=False,
+)
+
 args = parser.parse_args()
 
 if args.storage_path:

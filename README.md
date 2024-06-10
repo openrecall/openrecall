@@ -82,6 +82,7 @@ Open your browser to:
 
 ## Arguments
 `--storage-path` (default: user data path for your OS): allows you to specify the pathwhere the screenshots and database should be stored.
+'--primary-monitor-only' (default: False): only record the primary monitor (rather than individual screenshots for other monitors)
 
 ## Contribute
 

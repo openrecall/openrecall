@@ -5,7 +5,7 @@ import mss
 import numpy as np
 from PIL import Image
 
-from openrecall.config import screenshots_path
+from openrecall.config import screenshots_path, args
 from openrecall.database import insert_entry
 from openrecall.nlp import get_embedding
 from openrecall.ocr import extract_text_from_image
@@ -39,21 +39,32 @@ def is_similar(img1, img2, similarity_threshold=0.9):
 
 def take_screenshots(monitor=1):
     screenshots = []
+
     with mss.mss() as sct:
         for monitor in range(len(sct.monitors)):
+
+            if args.primary_monitor_only and monitor != 1:
+                continue
+            
             monitor_ = sct.monitors[monitor]
             screenshot = np.array(sct.grab(monitor_))
             screenshot = screenshot[:, :, [2, 1, 0]]
             screenshots.append(screenshot)
+    
     return screenshots
 
 
 def record_screenshots_thread():
     last_screenshots = take_screenshots()
+
     while True:
+    
         screenshots = take_screenshots()
+    
         for i, screenshot in enumerate(screenshots):
+            
             last_screenshot = last_screenshots[i]
+
             if not is_similar(screenshot, last_screenshot):
                 last_screenshots[i] = screenshot
                 image = Image.fromarray(screenshot)
@@ -70,4 +81,5 @@ def record_screenshots_thread():
                 insert_entry(
                     text, timestamp, embedding, active_app_name, active_window_title
                 )
+                
         time.sleep(3)
