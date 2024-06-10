@@ -8,7 +8,6 @@ parser = argparse.ArgumentParser(
 
 parser.add_argument(
     "--storage-path",
-    type=str,
     default=None,
     help="Path to store the screenshots and database",
 )
@@ -17,16 +16,11 @@ parser.add_argument(
     "--primary-monitor-only",
     action="store_true",
     help="Only record the primary monitor",
-    type=bool,
     default=False,
 )
 
 args = parser.parse_args()
 
-if args.storage_path:
-    appdata_folder = args.storage_path
-    screenshots_path = os.path.join(appdata_folder, "screenshots")
-    db_path = os.path.join(appdata_folder, "recall.db")
 
 def get_appdata_folder(app_name="openrecall"):
     if sys.platform == "win32":
