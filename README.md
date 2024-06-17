@@ -6,7 +6,9 @@
 \____/ .___/\___/_/ /_/_/ |_|\___/\___/\__,_/_/_/      
     /_/                                                                                                                         
 ```
-**Enjoy this project?** Show your support by starring it! ⭐️
+**Enjoy this project?** Show your support by starring it! ⭐️ Thank you!
+
+Join our [Discord](https://discord.gg/RzvCYRgUkx) and/or [Telegram](https://t.me/+5DULWTesqUYwYjY0) community to stay informed of updates!
 
 # Take Control of Your Digital Memory
 
