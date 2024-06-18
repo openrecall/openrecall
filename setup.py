@@ -17,6 +17,7 @@ install_requires = [
     "shapely==2.0.4",
     "h5py==3.11.0",
     "rapidfuzz==3.9.3",
+    "Pillow==10.3.0"
 ]
 
 # Define OS-specific dependencies
