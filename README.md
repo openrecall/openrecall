@@ -6,7 +6,9 @@
 \____/ .___/\___/_/ /_/_/ |_|\___/\___/\__,_/_/_/      
     /_/                                                                                                                         
 ```
-**Enjoy this project?** Show your support by starring it! ⭐️
+**Enjoy this project?** Show your support by starring it! ⭐️ Thank you!
+
+Join our [Discord](https://discord.gg/RzvCYRgUkx) and/or [Telegram](https://t.me/+5DULWTesqUYwYjY0) community to stay informed of updates!
 
 # Take Control of Your Digital Memory
 
@@ -81,13 +83,16 @@ Open your browser to:
 [http://localhost:8082](http://localhost:8082) to access OpenRecall.
 
 ## Arguments
-`--storage-path` (default: user data path for your OS): allows you to specify the pathwhere the screenshots and database should be stored.
+`--storage-path` (default: user data path for your OS): allows you to specify the path where the screenshots and database should be stored.
 
 `--primary-monitor-only` (default: False): only record the primary monitor (rather than individual screenshots for other monitors)
 
 ## Contribute
 
 As an open-source project, we welcome contributions from the community. If you'd like to help improve OpenRecall, please submit a pull request or open an issue on our GitHub repository.
+
+## Contact the maintainers
+mail@datatalk.be
 
 ## License
 
