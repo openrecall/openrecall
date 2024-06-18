@@ -11,35 +11,18 @@ install_requires = [
     "Flask==3.0.3",
     "numpy==1.26.4",
     "mss==9.0.1",
-    "pillow==10.3.0",
     "sentence-transformers==3.0.0",
     "torch==2.3.0",
     "torchvision==0.18.0",
-    "shapely",
-    "h5py",
-    "rapidfuzz",
+    "shapely==2.0.4",
+    "h5py==3.11.0",
+    "rapidfuzz==3.9.3",
 ]
 
-import subprocess
-import sys
-
-
-def install_doctr():
-    subprocess.run(
-        [
-            sys.executable,
-            "-m",
-            "pip",
-            "install",
-            "git+https://github.com/koenvaneijk/doctr.git",
-        ]
-    )
-
-
-install_doctr()
-
 # Define OS-specific dependencies
-extras_require = {"windows": ["pywin32", "psutil"], "macos": ["pyobjc"], "linux": []}
+extras_require = {"windows": ["pywin32", "psutil"], "macos": ["pyobjc==10.3"], "linux": [],
+    'python-doctr': ['python-doctr @ git+https://github.com/koenvaneijk/doctr.git@af711bc04eb8876a7189923fb51ec44481ee18cd']
+}
 
 # Determine the current OS
 current_os = platform.system().lower()
@@ -56,9 +39,11 @@ else:
 if current_os and current_os in extras_require:
     install_requires.extend(extras_require[current_os])
 
+install_requires.extend(extras_require.get("python-doctr", []))
+
 setup(
     name="OpenRecall",
-    version="0.5",
+    version="0.6",
     packages=find_packages(),
     install_requires=install_requires,
     long_description=long_description,
