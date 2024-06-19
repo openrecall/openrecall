@@ -2,6 +2,14 @@
 
 A sensible option to protect your (potentially sensitive) OpenRecall data is to use an external storage device, such as a USB stick or SD card (for MacBook Pro or laptops) with real-time disk encryption enabled. On Windows, BitLocker can be used. On macOS, you can create an encrypted disk image. On Linux, LUKS can be used to encrypt the disk. Before encrypting/formatting your storage device, ensure you have backed up any important data as the process will erase all existing data on the device. The OpenRecall project or its maintainers are not responsible for any data that can be damaged or lost during the below process or due to the use of OpenRecall.
 
+There are several benefits to using an encrypted disk for your OpenRecall data:
+- **Privacy**: Your data is encrypted and can only be accessed with the correct password.
+- **Security**: In the event of loss or theft, your data is protected.
+- **Portability**: You can easily move your OpenRecall data between different devices (using the same encryption software).
+- **Peace of Mind**: You can rest easy knowing your data is secure.
+- **Physical Control**: You have full, physical, control over your data, unlike cloud storage solutions. If you take the disk out of your computer, your data is safe and offline.
+
+We strongly recommend to choose a strong password for your encrypted disk. A strong password should be at least 12 characters long and contain a mix of uppercase and lowercase letters, numbers, and special characters.
 
 ## Requirements
 - A recent USB stick or (micro) SD card with sensible read/write speeds
