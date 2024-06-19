@@ -37,10 +37,14 @@ def insert_entry(
     text: str, timestamp: int, embedding: Any, app: str, title: str
 ) -> None:
     embedding_bytes = embedding.tobytes()
-    with sqlite3.connect(db_path) as conn:
-        c = conn.cursor()
-        c.execute(
-            "INSERT INTO entries (text, timestamp, embedding, app, title) VALUES (?, ?, ?, ?, ?)",
-            (text, timestamp, embedding_bytes, app, title),
-        )
-        conn.commit()
+    try:
+
+        with sqlite3.connect(db_path) as conn:
+            c = conn.cursor()
+            c.execute(
+                "INSERT INTO entries (text, timestamp, embedding, app, title) VALUES (?, ?, ?, ?, ?)",
+                (text, timestamp, embedding_bytes, app, title),
+            )
+            conn.commit()
+    except sqlite3.OperationalError as e:
+        print("Error inserting entry:", e)
