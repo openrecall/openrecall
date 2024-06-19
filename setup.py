@@ -12,7 +12,7 @@ install_requires = [
     "numpy==1.26.4",
     "mss==9.0.1",
     "sentence-transformers==3.0.0",
-    "torch==2.3.0",
+    "torch==2.2.1",
     "torchvision==0.18.0",
     "shapely==2.0.4",
     "h5py==3.11.0",
