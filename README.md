@@ -83,7 +83,7 @@ Open your browser to:
 [http://localhost:8082](http://localhost:8082) to access OpenRecall.
 
 ## Arguments
-`--storage-path` (default: user data path for your OS): allows you to specify the path where the screenshots and database should be stored.
+`--storage-path` (default: user data path for your OS): allows you to specify the path where the screenshots and database should be stored. We recommend [creating an encrypted volume](docs/encryption.md) to store your data.
 
 `--primary-monitor-only` (default: False): only record the primary monitor (rather than individual screenshots for other monitors)
 
