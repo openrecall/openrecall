@@ -6,7 +6,9 @@
 \____/ .___/\___/_/ /_/_/ |_|\___/\___/\__,_/_/_/      
     /_/                                                                                                                         
 ```
-**Enjoy this project?** Show your support by starring it! ⭐️
+**Enjoy this project?** Show your support by starring it! ⭐️ Thank you!
+
+Join our [Discord](https://discord.gg/RzvCYRgUkx) and/or [Telegram](https://t.me/+5DULWTesqUYwYjY0) community to stay informed of updates!
 
 # Take Control of Your Digital Memory
 
@@ -24,8 +26,8 @@ OpenRecall offers several key advantages over closed-source alternatives:
 
 - **Transparency**: OpenRecall is 100% open-source, allowing you to audit the source code for potential backdoors or privacy-invading features.
 - **Cross-platform Support**: OpenRecall works on Windows, macOS, and Linux, giving you the freedom to use it on your preferred operating system.
-- **Privacy-focused**: Your data is stored locally on your device, and you have the option (soon to be implemented) to encrypt it with a password for added security. No cloud integration is required. 
-- **Hardware Compatibility**: OpenRecall is designed to work with a wide range of hardware, unlike proprietary solutions that may require specific certified devices.
+- **Privacy-focused**: Your data is stored locally on your device, no internet connection or cloud is required. In addition, you have the option to encrypt the data on a removable disk for added security, read how in our [guide](docs/encryption.md) here. 
+- **Hardware Compatibility**: OpenRecall is designed to work with a [wide range of hardware](docs/hardware.md), unlike proprietary solutions that may require specific certified devices.
 
 <p align="center">
   <a href="https://twitter.com/elonmusk/status/1792690964672450971" target="_blank">
@@ -70,7 +72,7 @@ OpenRecall offers several key advantages over closed-source alternatives:
 
 To install:
 ```
-pip install --upgrade --no-cache-dir git+https://github.com/openrecall/openrecall.git
+python3 -m pip install --upgrade --no-cache-dir git+https://github.com/openrecall/openrecall.git
 ```
 
 To run:
@@ -80,9 +82,17 @@ python3 -m openrecall.app
 Open your browser to:
 [http://localhost:8082](http://localhost:8082) to access OpenRecall.
 
+## Arguments
+`--storage-path` (default: user data path for your OS): allows you to specify the path where the screenshots and database should be stored. We recommend [creating an encrypted volume](docs/encryption.md) to store your data.
+
+`--primary-monitor-only` (default: False): only record the primary monitor (rather than individual screenshots for other monitors)
+
 ## Contribute
 
 As an open-source project, we welcome contributions from the community. If you'd like to help improve OpenRecall, please submit a pull request or open an issue on our GitHub repository.
+
+## Contact the maintainers
+mail@datatalk.be
 
 ## License
 

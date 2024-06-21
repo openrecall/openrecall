@@ -1,5 +1,25 @@
 import os
 import sys
+import argparse
+
+parser = argparse.ArgumentParser(
+    description="OpenRecall"
+)
+
+parser.add_argument(
+    "--storage-path",
+    default=None,
+    help="Path to store the screenshots and database",
+)
+
+parser.add_argument(
+    "--primary-monitor-only",
+    action="store_true",
+    help="Only record the primary monitor",
+    default=False,
+)
+
+args = parser.parse_args()
 
 
 def get_appdata_folder(app_name="openrecall"):
@@ -18,10 +38,14 @@ def get_appdata_folder(app_name="openrecall"):
         os.makedirs(path)
     return path
 
-
-appdata_folder = get_appdata_folder()
-db_path = os.path.join(appdata_folder, "recall.db")
-screenshots_path = os.path.join(appdata_folder, "screenshots")
+if args.storage_path:
+    appdata_folder = args.storage_path
+    screenshots_path = os.path.join(appdata_folder, "screenshots")
+    db_path = os.path.join(appdata_folder, "recall.db")
+else:   
+    appdata_folder = get_appdata_folder()
+    db_path = os.path.join(appdata_folder, "recall.db")
+    screenshots_path = os.path.join(appdata_folder, "screenshots")
 
 if not os.path.exists(screenshots_path):
     try:
