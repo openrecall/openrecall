@@ -28,7 +28,7 @@ def get_timestamps() -> List[int]:
     with sqlite3.connect(db_path) as conn:
         c = conn.cursor()
         results = c.execute(
-            "SELECT timestamp FROM entries ORDER BY timestamp DESC LIMIT 1000"
+            "SELECT timestamp FROM entries ORDER BY timestamp DESC"
         ).fetchall()
         return [result[0] for result in results]
 
