@@ -9,7 +9,7 @@ from openrecall.config import screenshots_path, args
 from openrecall.database import insert_entry
 from openrecall.nlp import get_embedding
 from openrecall.ocr import extract_text_from_image
-from openrecall.utils import get_active_app_name, get_active_window_title
+from openrecall.utils import get_active_app_name, get_active_window_title, is_user_active
 
 
 def mean_structured_similarity_index(img1, img2, L=255):
@@ -55,9 +55,16 @@ def take_screenshots(monitor=1):
 
 
 def record_screenshots_thread():
+    # TODO: fix the error from huggingface tokenizers
+    import os
+    os.environ["TOKENIZERS_PARALLELISM"] = "false"
+
     last_screenshots = take_screenshots()
 
     while True:
+        if not is_user_active():
+            time.sleep(3)
+            continue
     
         screenshots = take_screenshots()
     

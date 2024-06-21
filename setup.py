@@ -44,7 +44,7 @@ install_requires.extend(extras_require.get("python-doctr", []))
 
 setup(
     name="OpenRecall",
-    version="0.7",
+    version="0.8",
     packages=find_packages(),
     install_requires=install_requires,
     long_description=long_description,
