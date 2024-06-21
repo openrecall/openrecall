@@ -29,9 +29,11 @@ def timestamp_to_human_readable(timestamp):
 def get_active_app_name_osx():
     from AppKit import NSWorkspace
 
-    active_app = NSWorkspace.sharedWorkspace().activeApplication()
-    return active_app["NSApplicationName"]
-
+    try:
+        active_app = NSWorkspace.sharedWorkspace().activeApplication()
+        return active_app["NSApplicationName"]
+    except:
+        return ""
 
 def get_active_window_title_osx():
     from Quartz import (
@@ -40,14 +42,17 @@ def get_active_window_title_osx():
         kCGWindowListOptionOnScreenOnly,
     )
 
-    app_name = get_active_app_name_osx()
-    windows = CGWindowListCopyWindowInfo(
-        kCGWindowListOptionOnScreenOnly, kCGNullWindowID
-    )
-    for window in windows:
-        if window["kCGWindowOwnerName"] == app_name:
-            return window.get("kCGWindowName", "Unknown")
-    return None
+    try:
+        app_name = get_active_app_name_osx()
+        windows = CGWindowListCopyWindowInfo(
+            kCGWindowListOptionOnScreenOnly, kCGNullWindowID
+        )
+        for window in windows:
+            if window["kCGWindowOwnerName"] == app_name:
+                return window.get("kCGWindowName", "Unknown")
+    except:
+        return ""
+    return ""
 
 
 def get_active_app_name_windows():
@@ -55,17 +60,23 @@ def get_active_app_name_windows():
     import win32gui
     import win32process
 
-    hwnd = win32gui.GetForegroundWindow()
-    _, pid = win32process.GetWindowThreadProcessId(hwnd)
-    exe = psutil.Process(pid).name()
-    return exe
+    try:
+        hwnd = win32gui.GetForegroundWindow()
+        _, pid = win32process.GetWindowThreadProcessId(hwnd)
+        exe = psutil.Process(pid).name()
+        return exe
+    except:
+        return ""
 
 
 def get_active_window_title_windows():
     import win32gui
 
-    hwnd = win32gui.GetForegroundWindow()
-    return win32gui.GetWindowText(hwnd)
+    try:
+        hwnd = win32gui.GetForegroundWindow()
+        return win32gui.GetWindowText(hwnd)
+    except:
+        return ""
 
 
 def get_active_app_name_linux():
