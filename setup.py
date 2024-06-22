@@ -18,6 +18,7 @@ install_requires = [
     "h5py==3.11.0",
     "rapidfuzz==3.9.3",
     "Pillow==10.3.0"
+    "python-doctr @ git+https://github.com/koenvaneijk/doctr.git@af711bc04eb8876a7189923fb51ec44481ee18cd",
 ]
 
 # Define OS-specific dependencies
