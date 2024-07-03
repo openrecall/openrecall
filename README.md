@@ -90,6 +90,7 @@ Open your browser to:
 ## Contribute
 
 As an open-source project, we welcome contributions from the community. If you'd like to help improve OpenRecall, please submit a pull request or open an issue on our GitHub repository.
+For [testing](docs/testing.md) we use pytest.
 
 ## Contact the maintainers
 mail@datatalk.be

@@ -1,3 +1,16 @@
+"""Initial configuration of the application. Read the cli parameters, check & set path to 
+screenshots and database
+
+Usage:
+import openrecall.config
+
+Returns:
+    parser: parser object containing the CLI parameters
+    appdata_folder: path to appdata folder
+    screenshots_path: path to screenshots folder
+    db_path: path to sqlite database recall.db
+    get_appdata_folder: Function to get appdata folder
+"""
 import os
 import sys
 import argparse
@@ -19,10 +32,22 @@ parser.add_argument(
     default=False,
 )
 
-args = parser.parse_args()
+# do not exit on unknown parametes to enables pytest.
+# unknown parameters are never used.
+# Consider invoking these functions from the main application
+args, unknown = parser.parse_known_args()
 
 
 def get_appdata_folder(app_name="openrecall"):
+    """
+    This function returns the path to the appdata folder dependent on the opersting system.
+    Create directory if not exists.
+
+    Args:
+        app_name (str, optional): name of the directory for this application. 
+        Defaults to "openrecall".
+    """
+
     if sys.platform == "win32":
         appdata = os.getenv("APPDATA")
         if not appdata:
@@ -38,11 +63,12 @@ def get_appdata_folder(app_name="openrecall"):
         os.makedirs(path)
     return path
 
+
 if args.storage_path:
     appdata_folder = args.storage_path
     screenshots_path = os.path.join(appdata_folder, "screenshots")
     db_path = os.path.join(appdata_folder, "recall.db")
-else:   
+else:
     appdata_folder = get_appdata_folder()
     db_path = os.path.join(appdata_folder, "recall.db")
     screenshots_path = os.path.join(appdata_folder, "screenshots")
