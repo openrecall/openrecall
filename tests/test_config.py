@@ -1,6 +1,6 @@
 import pytest
 from unittest import mock
-from openrecall.config import get_appdata_folder
+from openrecall.config import get_appdata_folder, screenshots_path, db_path
 
 def test_get_appdata_folder_windows(tmp_path):
     with mock.patch('sys.platform', 'win32'):
@@ -28,3 +28,12 @@ def test_get_appdata_folder_linux(tmp_path):
             expected_path = tmp_path / '.local' / 'share' / 'openrecall'
             assert get_appdata_folder() == str(expected_path)
             assert expected_path.exists()
+
+#Test if database exists
+def test_if_database_exists (tmp_path):
+    assert (tmp_path / db_path).exists()
+#Test if screenshot file exists
+
+def test_if_screenshot_path_exists (tmp_path):
+    assert (tmp_path / screenshots_path).exists()
+
