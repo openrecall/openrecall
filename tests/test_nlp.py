@@ -28,6 +28,8 @@ def test_cosine_similarity_arbitrary_vectors():
     expected_similarity = np.dot(a, b) / (np.linalg.norm(a) * np.linalg.norm(b))
     assert cosine_similarity(a, b) == pytest.approx(expected_similarity)
 
+# Test expects N/A after divison by zero, filter warning
+@pytest.mark.filterwarnings("ignore:invalid value encountered")
 def test_cosine_similarity_zero_vector():
     a = np.array([0, 0, 0])
     b = np.array([1, 0, 0])
