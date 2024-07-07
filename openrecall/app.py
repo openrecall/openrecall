@@ -9,6 +9,7 @@ from openrecall.database import create_db, get_all_entries, get_timestamps
 from openrecall.nlp import cosine_similarity, get_embedding
 from openrecall.screenshot import record_screenshots_thread
 from openrecall.utils import human_readable_time, timestamp_to_human_readable
+from openrecall.trayapp import create_system_tray_icon
 
 app = Flask(__name__)
 
@@ -190,5 +191,7 @@ if __name__ == "__main__":
     # Start the thread to record screenshots
     t = Thread(target=record_screenshots_thread)
     t.start()
+    tray_icon_thread=Thread (target=create_system_tray_icon().run)
+    tray_icon_thread.start()
 
     app.run(port=8082)
