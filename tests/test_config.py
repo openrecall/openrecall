@@ -1,6 +1,6 @@
-import pytest
+import pytest, sys
 from unittest import mock
-from openrecall.config import get_appdata_folder
+from openrecall.config import get_appdata_folder, check_python_version
 
 def test_get_appdata_folder_windows(tmp_path):
     with mock.patch('sys.platform', 'win32'):
@@ -28,3 +28,10 @@ def test_get_appdata_folder_linux(tmp_path):
             expected_path = tmp_path / '.local' / 'share' / 'openrecall'
             assert get_appdata_folder() == str(expected_path)
             assert expected_path.exists()
+
+def test_check_python_version():
+    with pytest.raises(SystemExit) :
+        check_python_version(version="3.12")
+    check_python_version("3.11")
+    check_python_version(version="3.9")
+   

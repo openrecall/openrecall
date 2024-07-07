@@ -10,9 +10,9 @@ Returns:
     screenshots_path: path to screenshots folder
     db_path: path to sqlite database recall.db
     get_appdata_folder: Function to get appdata folder
+    check_python_version: check the python version and exit if wrong version is used
 """
-import os
-import sys
+import os, sys
 import argparse
 
 parser = argparse.ArgumentParser(
@@ -78,3 +78,23 @@ if not os.path.exists(screenshots_path):
         os.makedirs(screenshots_path)
     except:
         pass
+
+def check_python_version(version=sys.version[:sys.version.find(".",2)]):
+    """
+    check_python_version: Stop execution if wrong python version is used
+    , warning if old version is used.
+    """
+    def make_version_set(vinfo):
+        return tuple(map(int, vinfo.split(".")))
+    filepath=os.path.join(os.path.dirname(__file__),"..",".python-version")
+    with open (filepath,"r") as f:
+        vinfo=f.readline().strip()
+    (major,minor) = make_version_set(vinfo)
+    (vmajor,vminor) = make_version_set(version)
+    if (major,minor) < (vmajor,vminor):
+        print ("ERROR: using wrong python version:",version,"please use python ",vinfo)
+        sys.exit()
+    if (major,minor) > (vmajor,vminor):
+        print ("WARNING: using older python version:",version,"please use python ",vinfo)
+
+check_python_version()    
