@@ -1,4 +1,10 @@
-from threading import Thread
+from threading import Thread, Event
+import logging
+import openrecall.log_config
+from openrecall.log_config import log_always
+from logging.handlers import RotatingFileHandler
+
+openrecall.log_config.setup_logging()
 
 import numpy as np
 from flask import Flask, render_template_string, request, send_from_directory
@@ -182,16 +188,22 @@ def search():
 def serve_image(filename):
     return send_from_directory(screenshots_path, filename)
 
-
 if __name__ == "__main__":
     create_db()
-
-    print(f"Appdata folder: {appdata_folder}")
-
-    # Start the thread to record screenshots
-    t = Thread(target=record_screenshots_thread)
+    log_always(f"Appdata folder: {appdata_folder}")
+    # Start the thread to record screenshots 
+    # and pass event that stops the thread after ctrl-c is pressed
+    stop_event=Event()
+    t = Thread(target=record_screenshots_thread, args=(stop_event,))
     t.start()
     tray_icon_thread=Thread (target=create_system_tray_icon().run)
     tray_icon_thread.start()
 
+    log_always("Screenshot thread started, pid=",t.native_id)
     app.run(port=8082)
+    # App was terminated, shutting down the threads
+    print ("Stop the Screenshot thread")
+    stop_event.set()
+    print ("Wait for the Screenshot thread to terminate")
+    t.join()
+    print ("Server & Screenshots stopped")
