@@ -14,6 +14,11 @@ Returns:
 """
 import os, sys
 import argparse
+import logging
+from openrecall.log_config import set_logging_level
+
+# Define a logger for this module
+logger = logging.getLogger(__name__)
 
 parser = argparse.ArgumentParser(
     description="OpenRecall"
@@ -31,6 +36,13 @@ parser.add_argument(
     help="Only record the primary monitor",
     default=False,
 )
+
+parser.add_argument(
+    "--debug",
+    help="Debug Level, default=WARNING",
+    default="WARNING",
+)
+
 
 # do not exit on unknown parametes to enables pytest.
 # unknown parameters are never used.
@@ -98,3 +110,8 @@ def check_python_version(version=sys.version[:sys.version.find(".",2)]):
         print ("WARNING: using older python version:",version,"please use python ",vinfo)
 
 check_python_version()    
+
+print(args.debug)
+set_logging_level(args.debug)
+logger.debug("config loaded")
+

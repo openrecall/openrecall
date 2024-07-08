@@ -1,6 +1,6 @@
 import pytest, sys
 from unittest import mock
-from openrecall.config import get_appdata_folder, check_python_version
+from openrecall.config import get_appdata_folder, screenshots_path, db_path
 
 def test_get_appdata_folder_windows(tmp_path):
     with mock.patch('sys.platform', 'win32'):
@@ -35,3 +35,11 @@ def test_check_python_version():
     check_python_version("3.11")
     check_python_version(version="3.9")
    
+#Test if database exists
+def test_if_database_exists (tmp_path):
+    assert (tmp_path / db_path).exists()
+#Test if screenshot file exists
+
+def test_if_screenshot_path_exists (tmp_path):
+    assert (tmp_path / screenshots_path).exists()
+

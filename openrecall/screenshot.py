@@ -4,6 +4,7 @@ import time
 import mss
 import numpy as np
 from PIL import Image
+from threading import Event
 
 from openrecall.config import screenshots_path, args
 from openrecall.database import insert_entry
@@ -37,31 +38,30 @@ def is_similar(img1, img2, similarity_threshold=0.9):
     return similarity >= similarity_threshold
 
 
-def take_screenshots(monitor=1):
+def take_screenshots(monitor_number=1):
     screenshots = []
 
     with mss.mss() as sct:
-        for monitor in range(len(sct.monitors)):
+        for monitor_number in range(len(sct.monitors)):
 
-            if args.primary_monitor_only and monitor != 1:
+            if args.primary_monitor_only and monitor_number != 1:
                 continue
             
-            monitor_ = sct.monitors[monitor]
-            screenshot = np.array(sct.grab(monitor_))
+            monitor_device = sct.monitors[monitor_number]
+            screenshot = np.array(sct.grab(monitor_device))
             screenshot = screenshot[:, :, [2, 1, 0]]
             screenshots.append(screenshot)
     
     return screenshots
 
 
-def record_screenshots_thread():
+def record_screenshots_thread(stop_event):
     # TODO: fix the error from huggingface tokenizers
     import os
     os.environ["TOKENIZERS_PARALLELISM"] = "false"
 
     last_screenshots = take_screenshots()
-
-    while True:
+    while not stop_event.is_set() :
         if not is_user_active():
             time.sleep(3)
             continue
@@ -90,3 +90,4 @@ def record_screenshots_thread():
                 )
                 
         time.sleep(3)
+    print ("Screenshot thread terminated.")

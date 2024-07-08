@@ -60,6 +60,7 @@ OpenRecall offers several key advantages over closed-source alternatives:
 | Cost             | Free                          | Part of Windows 11 (requires specialized hardware) | Monthly subscription                   |
 
 ## Quick links
+
 - [Roadmap](https://github.com/orgs/openrecall/projects/2) and you can [vote for your favorite features](https://github.com/openrecall/openrecall/discussions/9#discussion-6775473)
 - [FAQ](https://github.com/openrecall/openrecall/wiki/FAQ)
 
@@ -71,14 +72,17 @@ OpenRecall offers several key advantages over closed-source alternatives:
 - Git
 
 To install:
-```
+
+```bash
 python3 -m pip install --upgrade --no-cache-dir git+https://github.com/openrecall/openrecall.git
 ```
 
 To run:
-```
+
+```bash
 python3 -m openrecall.app
 ```
+
 Open your browser to:
 [http://localhost:8082](http://localhost:8082) to access OpenRecall.
 
