@@ -40,15 +40,16 @@ def get_appdata_folder(app_name="openrecall"):
 
 if args.storage_path:
     appdata_folder = args.storage_path
-    screenshots_path = os.path.join(appdata_folder, "screenshots")
-    db_path = os.path.join(appdata_folder, "recall.db")
-else:   
+else:
     appdata_folder = get_appdata_folder()
-    db_path = os.path.join(appdata_folder, "recall.db")
-    screenshots_path = os.path.join(appdata_folder, "screenshots")
 
-if not os.path.exists(screenshots_path):
-    try:
-        os.makedirs(screenshots_path)
-    except:
-        pass
+screenshots_path = os.path.join(appdata_folder, "screenshots")
+db_path = os.path.join(appdata_folder, "recall.db")
+model_cache_path = os.path.join(appdata_folder, "sentence_transformers")
+
+for d in [screenshots_path, model_cache_path]:
+    if not os.path.exists(d):
+        try:
+            os.makedirs(d)
+        except:
+            pass
