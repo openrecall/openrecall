@@ -48,3 +48,13 @@ def insert_entry(
             conn.commit()
     except sqlite3.OperationalError as e:
         print("Error inserting entry:", e)
+
+
+def get_entries_by_time_range(start_time: int, end_time: int) -> List[Entry]:
+    with sqlite3.connect(db_path) as conn:
+        c = conn.cursor()
+        results = c.execute(
+            "SELECT * FROM entries WHERE timestamp BETWEEN ? AND ? ORDER BY timestamp DESC",
+            (start_time, end_time),
+        ).fetchall()
+        return [Entry(*result) for result in results]
