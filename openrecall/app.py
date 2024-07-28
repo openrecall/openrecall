@@ -1,11 +1,17 @@
 from threading import Thread
 
+from datetime import datetime
 import numpy as np
 from flask import Flask, render_template_string, request, send_from_directory
 from jinja2 import BaseLoader
 
 from openrecall.config import appdata_folder, screenshots_path
-from openrecall.database import create_db, get_all_entries, get_timestamps
+from openrecall.database import (
+    create_db,
+    get_all_entries,
+    get_timestamps,
+    get_entries_by_time_range,
+)
 from openrecall.nlp import cosine_similarity, get_embedding
 from openrecall.screenshot import record_screenshots_thread
 from openrecall.utils import human_readable_time, timestamp_to_human_readable
@@ -52,11 +58,21 @@ base_template = """
 <body>
 <nav class="navbar navbar-light bg-light">
   <div class="container">
-    <form class="form-inline my-2 my-lg-0 w-100 d-flex" action="/search" method="get">
-      <input class="form-control flex-grow-1 mr-sm-2" type="search" name="q" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">
-        <i class="bi bi-search"></i>
-      </button>
+    <form class="form-inline my-2 my-lg-0 w-100 d-flex justify-content-between" action="/search" method="get">
+        <div class="form-group">
+            <input type="text" class="form-control" name="q" placeholder="Search" value="{{ request.args.get('q', '') }}">
+        </div>
+        <div class="form-group mx-sm-3">
+            <label for="start_time" class="mr-2">Start Time</label>
+            <input type="datetime-local" class="form-control" name="start_time" value="{{ request.args.get('start_time', '') }}">
+        </div>
+        <div class="form-group mx-sm-3">
+            <label for="end_time" class="mr-2">End Time</label>
+            <input type="datetime-local" class="form-control" name="end_time" value="{{ request.args.get('end_time', '') }}">
+        </div>
+        <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">
+            <i class="bi bi-search"></i>
+        </button>
     </form>
   </div>
 </nav>
@@ -68,7 +84,6 @@ base_template = """
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-  
 </body>
 </html>
 """
@@ -136,7 +151,18 @@ def timeline():
 @app.route("/search")
 def search():
     q = request.args.get("q")
-    entries = get_all_entries()
+    start_time_str = request.args.get("start_time")
+    end_time_str = request.args.get("end_time")
+
+    if start_time_str and end_time_str:
+        start_time = int(
+            datetime.strptime(start_time_str, "%Y-%m-%dT%H:%M").timestamp()
+        )
+        end_time = int(datetime.strptime(end_time_str, "%Y-%m-%dT%H:%M").timestamp())
+        entries = get_entries_by_time_range(start_time, end_time)
+    else:
+        entries = get_all_entries()
+
     embeddings = [
         np.frombuffer(entry.embedding, dtype=np.float64) for entry in entries
     ]
