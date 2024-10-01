@@ -97,3 +97,28 @@ mail@datatalk.be
 ## License
 
 OpenRecall is released under the [AGPLv3](https://opensource.org/licenses/AGPL-3.0), ensuring that it remains open and accessible to everyone.
+
+## Uninstall
+
+To uninstall OpenRecall and remove all stored data:
+
+1. Uninstall the package:
+   ```
+   pip uninstall openrecall
+   ```
+
+2. Remove stored data:
+   - On Windows:
+     ```
+     rmdir /s %APPDATA%\openrecall
+     ```
+   - On macOS:
+     ```
+     rm -rf ~/Library/Application\ Support/openrecall
+     ```
+   - On Linux:
+     ```
+     rm -rf ~/.local/share/openrecall
+     ```
+
+Note: If you specified a custom storage path using the `--storage-path` argument, make sure to remove that directory instead.
