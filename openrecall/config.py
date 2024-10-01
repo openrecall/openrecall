@@ -2,9 +2,7 @@ import os
 import sys
 import argparse
 
-parser = argparse.ArgumentParser(
-    description="OpenRecall"
-)
+parser = argparse.ArgumentParser(description="OpenRecall")
 
 parser.add_argument(
     "--storage-path",
@@ -38,11 +36,12 @@ def get_appdata_folder(app_name="openrecall"):
         os.makedirs(path)
     return path
 
+
 if args.storage_path:
     appdata_folder = args.storage_path
     screenshots_path = os.path.join(appdata_folder, "screenshots")
     db_path = os.path.join(appdata_folder, "recall.db")
-else:   
+else:
     appdata_folder = get_appdata_folder()
     db_path = os.path.join(appdata_folder, "recall.db")
     screenshots_path = os.path.join(appdata_folder, "screenshots")

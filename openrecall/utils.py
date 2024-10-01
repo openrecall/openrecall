@@ -1,5 +1,6 @@
 import sys
 
+
 def human_readable_time(timestamp):
     import datetime
 
@@ -34,6 +35,7 @@ def get_active_app_name_osx():
         return active_app["NSApplicationName"]
     except:
         return ""
+
 
 def get_active_window_title_osx():
     from Quartz import (
@@ -80,11 +82,12 @@ def get_active_window_title_windows():
 
 
 def get_active_app_name_linux():
-    return ''
+    return ""
 
 
 def get_active_window_title_linux():
-    return ''
+    return ""
+
 
 def get_active_app_name():
     if sys.platform == "win32":
@@ -107,28 +110,29 @@ def get_active_window_title():
     else:
         raise NotImplementedError("This platform is not supported")
 
+
 def is_user_active_osx():
     import subprocess
 
     try:
         # Run the 'ioreg' command to get idle time information
         output = subprocess.check_output(["ioreg", "-c", "IOHIDSystem"]).decode()
-        
+
         # Find the line containing "HIDIdleTime"
-        for line in output.split('\n'):
+        for line in output.split("\n"):
             if "HIDIdleTime" in line:
                 # Extract the idle time value
-                idle_time = int(line.split('=')[-1].strip())
-                
+                idle_time = int(line.split("=")[-1].strip())
+
                 # Convert idle time from nanoseconds to seconds
                 idle_seconds = idle_time / 1000000000
-                
+
                 # If idle time is less than 5 seconds, consider the user not idle
                 return idle_seconds < 5
-        
+
         # If "HIDIdleTime" is not found, assume the user is not idle
         return True
-    
+
     except subprocess.CalledProcessError:
         # If there's an error running the command, assume the user is not idle
         return True
@@ -136,6 +140,7 @@ def is_user_active_osx():
         print(f"An error occurred: {e}")
         # If there's any other error, assume the user is not idle
         return True
+
 
 def is_user_active():
     if sys.platform == "win32":
@@ -146,4 +151,3 @@ def is_user_active():
         return True
     else:
         raise NotImplementedError("This platform is not supported")
-    
