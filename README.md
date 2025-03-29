@@ -67,7 +67,7 @@ OpenRecall offers several key advantages over closed-source alternatives:
 
 ### Prerequisites
 - Python 3.11
-- MacOSX/Windows/Linux
+- MacOSX/Windows/Linux (X11 only)
 - Git
 
 To install:
