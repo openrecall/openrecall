@@ -66,7 +66,7 @@ class TestDatabase(unittest.TestCase):
         if self.conn:
             self.conn.close()
 
-    def test_01_create_db(self):
+    def test_create_db(self):
         """Test if create_db creates the table and index."""
         # Check if table exists
         cursor = self.conn.cursor()
@@ -103,7 +103,7 @@ class TestDatabase(unittest.TestCase):
         retrieved_embedding = np.frombuffer(result[5], dtype=np.float32)
         np.testing.assert_array_almost_equal(retrieved_embedding, embedding)
 
-    def test_03_insert_duplicate_timestamp(self):
+    def test_insert_duplicate_timestamp(self):
         """Test inserting an entry with a duplicate timestamp (should be ignored)."""
         ts = int(time.time())
         embedding1 = np.array([0.1, 0.2, 0.3], dtype=np.float32)
@@ -126,12 +126,12 @@ class TestDatabase(unittest.TestCase):
         text = cursor.fetchone()[0]
         self.assertEqual(text, "First text") # Ensure the first one was kept
 
-    def test_04_get_all_entries_empty(self):
+    def test_get_all_entries_empty(self):
         """Test getting entries from an empty database."""
         entries = get_all_entries()
         self.assertEqual(entries, [])
 
-    def test_05_get_all_entries_multiple(self):
+    def test_get_all_entries_multiple(self):
         """Test retrieving multiple entries."""
         ts1 = int(time.time())
         ts2 = ts1 + 10
@@ -163,12 +163,12 @@ class TestDatabase(unittest.TestCase):
         self.assertEqual(entries[2].text, "Text 3")
         np.testing.assert_array_almost_equal(entries[2].embedding, emb3)
 
-    def test_06_get_timestamps_empty(self):
+    def test_get_timestamps_empty(self):
         """Test getting timestamps from an empty database."""
         timestamps = get_timestamps()
         self.assertEqual(timestamps, [])
 
-    def test_07_get_timestamps_multiple(self):
+    def test_get_timestamps_multiple(self):
         """Test retrieving multiple timestamps."""
         ts1 = int(time.time())
         ts2 = ts1 + 10
