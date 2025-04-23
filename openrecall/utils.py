@@ -1,7 +1,5 @@
 import sys
 import datetime
-import time
-from typing import Any  # Using Any for platform-specific imports
 
 # Platform-specific imports with error handling
 try:
@@ -93,22 +91,38 @@ def get_active_app_name_osx() -> str:
         return ""
 
 
-def get_active_window_title_osx():
-    from Quartz import (
-        CGWindowListCopyWindowInfo,
-        kCGNullWindowID,
-        kCGWindowListOptionOnScreenOnly,
-    )
+def get_active_window_title_osx() -> str:
+    """Gets the title of the active window on macOS.
 
+    Requires the pyobjc package. Finds the frontmost window associated with the
+    currently active application.
+
+    Returns:
+        The title of the active window, or an empty string if unavailable.
+    """
+    if CGWindowListCopyWindowInfo is None or kCGNullWindowID is None or kCGWindowListOptionOnScreenOnly is None:
+        return ""  # Indicate unavailability if import failed
     try:
         app_name = get_active_app_name_osx()
-        windows = CGWindowListCopyWindowInfo(
-            kCGWindowListOptionOnScreenOnly, kCGNullWindowID
-        )
-        for window in windows:
-            if window["kCGWindowOwnerName"] == app_name:
-                return window.get("kCGWindowName", "Unknown")
-    except:
+        if not app_name:
+            return ""
+
+        # Get window list ordered front-to-back
+        options = kCGWindowListOptionOnScreenOnly
+        window_list = CGWindowListCopyWindowInfo(options, kCGNullWindowID)
+
+        for window in window_list:
+            # Check if the window belongs to the active application
+            if window.get("kCGWindowOwnerName") == app_name:
+                # Check if it's a normal window (layer 0) and has a title
+                if window.get("kCGWindowLayer") == 0 and "kCGWindowName" in window:
+                    title = window.get("kCGWindowName", "")
+                    if title:  # Return the first non-empty title found
+                        return title
+        # Fallback if no suitable window title found for the active app
+        return ""
+    except Exception as e:
+        print(f"Error getting macOS window title: {e}")
         return ""
     return ""  # Default if no specific window is found
 
@@ -163,12 +177,55 @@ def get_active_app_name_linux() -> str:
     or similar tools/libraries).
 
     Returns:
-        An empty string (currently not implemented).
+        The instance name of the active window's class, or an empty string if
+        unavailable or on error. Requires 'xprop' utility.
     """
-    # TODO: Implement Linux active app name retrieval
-    # Example using subprocess and xprop (requires xprop to be installed):
-    # try:
-    #     root = subprocess.Popen(['xprop', '-root', '_NET_ACTIVE_WINDOW'], stdout=subprocess.PIPE)
+    if subprocess is None:
+        print("Warning: 'subprocess' module not available for Linux app name check.")
+        return ""
+    try:
+        # Get active window ID
+        active_window_cmd = ['xprop', '-root', '_NET_ACTIVE_WINDOW']
+        active_window_proc = subprocess.Popen(active_window_cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        stdout, stderr = active_window_proc.communicate(timeout=1)
+        if active_window_proc.returncode != 0:
+            print(f"Error running xprop for active window: {stderr.decode()}")
+            return ""
+
+        match = re.search(rb'window id # (0x[0-9a-fA-F]+)', stdout)
+        if not match:
+            print("Could not find active window ID using xprop.")
+            return ""
+        window_id = match.group(1).decode('utf-8')
+
+        # Get WM_CLASS for the window ID
+        wm_class_cmd = ['xprop', '-id', window_id, 'WM_CLASS']
+        wm_class_proc = subprocess.Popen(wm_class_cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        stdout, stderr = wm_class_proc.communicate(timeout=1)
+        if wm_class_proc.returncode != 0:
+            print(f"Error running xprop for WM_CLASS: {stderr.decode()}")
+            return ""
+
+        # WM_CLASS(STRING) = "instance", "class"
+        match = re.search(rb'WM_CLASS\(STRING\) = "([^"]+)"(?:, "([^"]+)")?', stdout)
+        if match:
+            # Return the instance name if available, otherwise the class name
+            instance = match.group(1).decode('utf-8')
+            # class_name = match.group(2).decode('utf-8') if match.group(2) else None
+            return instance
+        else:
+            print(f"Could not parse WM_CLASS for window ID {window_id}.")
+            return ""
+
+    except FileNotFoundError:
+        print("Error: 'xprop' command not found. Please install xprop.")
+        return ""
+    except subprocess.TimeoutExpired:
+        print("Error: 'xprop' command timed out.")
+        return ""
+    except Exception as e:
+         print(f"Error getting Linux app name: {e}")
+         return ""
     #     stdout, _ = root.communicate()
     #     active_window_id = re.search(b'window id # (0x[0-9a-f]+)', stdout)
     #     if active_window_id:
@@ -192,12 +249,58 @@ def get_active_window_title_linux() -> str:
     or similar tools/libraries).
 
     Returns:
-        An empty string (currently not implemented).
+        The title of the active window, or an empty string if unavailable or on error.
+        Requires 'xprop' utility.
     """
-    # TODO: Implement Linux active window title retrieval
-    # Example using subprocess and xprop:
-    # try:
-    #     root = subprocess.Popen(['xprop', '-root', '_NET_ACTIVE_WINDOW'], stdout=subprocess.PIPE)
+    if subprocess is None:
+        print("Warning: 'subprocess' module not available for Linux window title check.")
+        return ""
+    try:
+        # Get active window ID
+        active_window_cmd = ['xprop', '-root', '_NET_ACTIVE_WINDOW']
+        active_window_proc = subprocess.Popen(active_window_cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        stdout, stderr = active_window_proc.communicate(timeout=1)
+        if active_window_proc.returncode != 0:
+            print(f"Error running xprop for active window: {stderr.decode()}")
+            return ""
+
+        match = re.search(rb'window id # (0x[0-9a-fA-F]+)', stdout)
+        if not match:
+            print("Could not find active window ID using xprop.")
+            return ""
+        window_id = match.group(1).decode('utf-8')
+
+        # Get _NET_WM_NAME (UTF-8 title) or WM_NAME (legacy title)
+        for prop_name in ['_NET_WM_NAME', 'WM_NAME']:
+            title_cmd = ['xprop', '-id', window_id, prop_name]
+            title_proc = subprocess.Popen(title_cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+            stdout, stderr = title_proc.communicate(timeout=1)
+
+            if title_proc.returncode == 0:
+                if prop_name == '_NET_WM_NAME':
+                    # _NET_WM_NAME(UTF8_STRING) = "Title"
+                    match = re.search(rb'_NET_WM_NAME\(UTF8_STRING\) = "([^"]*)"', stdout)
+                else: # WM_NAME
+                    # WM_NAME(STRING) = "Title"
+                    match = re.search(rb'WM_NAME\([^)]*\) = "([^"]*)"', stdout)
+
+                if match:
+                    title = match.group(1).decode('utf-8', errors='replace') # Decode UTF-8, replace errors
+                    return title
+
+        # If neither property provided a title
+        print(f"Could not find window title for window ID {window_id}.")
+        return ""
+
+    except FileNotFoundError:
+        print("Error: 'xprop' command not found. Please install xprop.")
+        return ""
+    except subprocess.TimeoutExpired:
+        print("Error: 'xprop' command timed out.")
+        return ""
+    except Exception as e:
+        print(f"Error getting Linux window title: {e}")
+        return ""
     #     stdout, _ = root.communicate()
     #     active_window_id = re.search(b'window id # (0x[0-9a-f]+)', stdout)
     #     if active_window_id:
@@ -330,15 +433,33 @@ def is_user_active_linux() -> bool:
     """Checks if the user is active on Linux.
 
     Placeholder implementation. Requires interaction with the display server
-    (X11 or Wayland) to get idle time.
+    (X11 or Wayland) to get idle time. Uses 'xprintidle'.
 
     Returns:
-        True (currently always assumes active).
+        True if the user is considered active (idle < 5s), False otherwise.
+        Returns True if the check fails or 'xprintidle' is not available.
     """
-    # TODO: Implement Linux user active check
-    # Example using xprintidle (requires xprintidle to be installed):
-    # try:
-    #     output = subprocess.check_output(['xprintidle'], timeout=1).decode()
+    if subprocess is None:
+        print("Warning: 'subprocess' module not available for Linux idle check.")
+        return True # Assume active if module missing
+    try:
+        # Run xprintidle to get idle time in milliseconds
+        output = subprocess.check_output(['xprintidle'], timeout=1).decode()
+        idle_milliseconds = int(output.strip())
+        idle_seconds = idle_milliseconds / 1000.0
+        return idle_seconds < 5.0
+    except FileNotFoundError:
+        print("Warning: 'xprintidle' command not found. Please install xprintidle to check user activity.")
+        return True # Assume active if command missing
+    except (subprocess.CalledProcessError, subprocess.TimeoutExpired) as e:
+        print(f"Warning: Could not check Linux idle time ({e}), assuming user is active.")
+        return True
+    except ValueError as e:
+        print(f"Warning: Could not parse output of xprintidle ('{output.strip()}'): {e}, assuming user is active.")
+        return True
+    except Exception as e:
+        print(f"An error occurred during Linux idle check: {e}")
+        return True # Assume active on other errors
     #     idle_milliseconds = int(output.strip())
     #     idle_seconds = idle_milliseconds / 1000.0
     #     return idle_seconds < 5.0
