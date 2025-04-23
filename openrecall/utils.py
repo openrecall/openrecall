@@ -1,5 +1,6 @@
 import sys
 import datetime
+import re
 
 # Platform-specific imports with error handling
 try:
@@ -226,20 +227,6 @@ def get_active_app_name_linux() -> str:
     except Exception as e:
          print(f"Error getting Linux app name: {e}")
          return ""
-    #     stdout, _ = root.communicate()
-    #     active_window_id = re.search(b'window id # (0x[0-9a-f]+)', stdout)
-    #     if active_window_id:
-    #         window_id = active_window_id.group(1).decode('utf-8')
-    #         prop = subprocess.Popen(['xprop', '-id', window_id, 'WM_CLASS'], stdout=subprocess.PIPE)
-    #         stdout, _ = prop.communicate()
-    #         wm_class = re.search(b'WM_CLASS\(STRING\) = (?P<class>.*)\n', stdout)
-    #         if wm_class:
-    #              class_string = wm_class.group("class").decode('utf-8')
-    #              # WM_CLASS usually gives "instance", "class" - return the instance
-    #              return class_string.split(', ')[0].strip('"')
-    # except Exception as e:
-    #      print(f"Error getting Linux app name: {e}")
-    return ""
 
 
 def get_active_window_title_linux() -> str:
@@ -301,20 +288,7 @@ def get_active_window_title_linux() -> str:
     except Exception as e:
         print(f"Error getting Linux window title: {e}")
         return ""
-    #     stdout, _ = root.communicate()
-    #     active_window_id = re.search(b'window id # (0x[0-9a-f]+)', stdout)
-    #     if active_window_id:
-    #         window_id = active_window_id.group(1).decode('utf-8')
-    #         prop = subprocess.Popen(['xprop', '-id', window_id, '_NET_WM_NAME'], stdout=subprocess.PIPE)
-    #         stdout, _ = prop.communicate()
-    #         wm_name = re.search(b'_NET_WM_NAME\(UTF8_STRING\) = "(?P<name>.*)"\n', stdout)
-    #         if wm_name:
-    #             return wm_name.group("name").decode('utf-8')
-    # except Exception as e:
-    #     print(f"Error getting Linux window title: {e}")
-    return ""
-
-
+    
 def get_active_app_name() -> str:
     """Gets the active application name for the current platform.
 
@@ -329,9 +303,7 @@ def get_active_app_name() -> str:
     elif sys.platform.startswith("linux"):
         return get_active_app_name_linux()
     else:
-        print("Warning: Active app name retrieval not implemented for this platform.")
-        return ""
-        # raise NotImplementedError(f"Platform '{sys.platform}' not supported yet for get_active_app_name")
+        raise NotImplementedError(f"Platform '{sys.platform}' not supported yet for get_active_app_name")
 
 
 def get_active_window_title() -> str:
@@ -349,8 +321,7 @@ def get_active_window_title() -> str:
         return get_active_window_title_linux()
     else:
         print("Warning: Active window title retrieval not implemented for this platform.")
-        return ""
-        # raise NotImplementedError(f"Platform '{sys.platform}' not supported yet for get_active_window_title")
+        raise NotImplementedError(f"Platform '{sys.platform}' not supported yet for get_active_window_title")
 
 
 def is_user_active_osx() -> bool:
@@ -460,17 +431,6 @@ def is_user_active_linux() -> bool:
     except Exception as e:
         print(f"An error occurred during Linux idle check: {e}")
         return True # Assume active on other errors
-    #     idle_milliseconds = int(output.strip())
-    #     idle_seconds = idle_milliseconds / 1000.0
-    #     return idle_seconds < 5.0
-    # except (FileNotFoundError, subprocess.CalledProcessError, subprocess.TimeoutExpired, ValueError) as e:
-    #     print(f"Warning: Could not check Linux idle time ({e}), assuming user is active.")
-    #     return True
-    # except Exception as e:
-    #     print(f"An error occurred during Linux idle check: {e}")
-    #     return True
-    print("Warning: Linux user active check not implemented, assuming active.")
-    return True
 
 
 def is_user_active() -> bool:
@@ -491,5 +451,4 @@ def is_user_active() -> bool:
         return is_user_active_linux()
     else:
         print(f"Warning: User active check not supported for platform '{sys.platform}', assuming active.")
-        return True
-        # raise NotImplementedError(f"Platform '{sys.platform}' not supported yet for is_user_active")
+        raise NotImplementedError(f"Platform '{sys.platform}' not supported yet for is_user_active")
