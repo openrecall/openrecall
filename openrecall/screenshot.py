@@ -156,7 +156,7 @@ def record_screenshots_thread() -> None:
                     active_app_name: str = get_active_app_name() or "Unknown App"
                     active_window_title: str = get_active_window_title() or "Unknown Title"
                     insert_entry(
-                        text, timestamp, embedding, active_app_name, active_window_title # Pass filename
+                        text, timestamp, embedding, active_app_name, active_window_title
                     )
 
         time.sleep(3) # Wait before taking the next screenshot
@@ -199,7 +199,7 @@ def record_screenshots_thread():
                     active_app_name: str = get_active_app_name() or "Unknown App"
                     active_window_title: str = get_active_window_title() or "Unknown Title"
                     insert_entry(
-                        text, timestamp, embedding, active_app_name, active_window_title # Pass filename
+                        text, timestamp, embedding, active_app_name, active_window_title
                     )
 
         time.sleep(3) # Wait before taking the next screenshot
