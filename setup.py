@@ -13,7 +13,7 @@ install_requires = [
     "mss==9.0.1",
     "sentence-transformers==3.0.0",
     "torch==2.6.0",
-    "torchvision==0.17.0",
+    "torchvision==0.21.0",
     "shapely==2.0.4",
     "h5py==3.11.0",
     "rapidfuzz==3.9.3",
