@@ -63,7 +63,10 @@ def is_similar(
     Returns:
         True if the images are similar, False otherwise.
     """
-    similarity: float = mean_structured_similarity_index(img1, img2)
+    # Compress images to reduce size and improve performance
+    compress_img1: np.ndarray = resize_image(img1)
+    compress_img2: np.ndarray = resize_image(img2)
+    similarity: float = mean_structured_similarity_index(compress_img1, compress_img2)
     return similarity >= similarity_threshold
 
 
@@ -203,3 +206,19 @@ def record_screenshots_thread():
                     )
 
         time.sleep(3) # Wait before taking the next screenshot
+
+
+def resize_image(image: np.ndarray, max_dim: int = 800) -> np.ndarray:
+    """
+    Resizes an image to fit within a maximum dimension while maintaining aspect ratio.
+
+    Args:
+        image: The input image as a NumPy array (RGB).
+        max_dim: The maximum dimension for resizing.
+
+    Returns:
+        The resized image as a NumPy array (RGB).
+    """
+    pil_image = Image.fromarray(image)
+    pil_image.thumbnail((max_dim, max_dim), Image.Resampling.LANCZOS)
+    return np.array(pil_image)
