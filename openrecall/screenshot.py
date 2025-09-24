@@ -192,14 +192,14 @@ def record_screenshots_thread():
                     format="webp",
                     lossless=True,
                 )
-                text: str = extract_text_from_image(current_screenshot)
+                text: str = extract_text_from_image(screenshot)
                 # Only proceed if OCR actually extracts text
                 if text.strip():
                     embedding: np.ndarray = get_embedding(text)
                     active_app_name: str = get_active_app_name() or "Unknown App"
                     active_window_title: str = get_active_window_title() or "Unknown Title"
                     insert_entry(
-                        text, timestamp, embedding, active_app_name, active_window_title, filename # Pass filename
+                        text, timestamp, embedding, active_app_name, active_window_title # Pass filename
                     )
 
         time.sleep(3) # Wait before taking the next screenshot
